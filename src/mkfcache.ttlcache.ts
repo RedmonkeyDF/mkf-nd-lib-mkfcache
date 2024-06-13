@@ -1,17 +1,17 @@
 import TTLCache from '@isaacs/ttlcache'
 import type { TTLOptions, Options } from '@isaacs/ttlcache'
-import { MkfBaseCache } from './mkfcache'
+import { MkfBaseCache, type CacheItem, walkCallback } from './mkfcache'
 
 export { type TTLOptions }
 
 export class MkfTtlCache extends MkfBaseCache {
 
-    private _cache
+    private _cache: TTLCache<string, any>
 
     constructor( opts?: {}) {
         super()
 
-        this._cache = new TTLCache(opts)
+        this._cache = new TTLCache<string, any>(opts)
     }
 
     async get<T>(key: string, opts?: {}): Promise<T|undefined> {
@@ -78,6 +78,14 @@ export class MkfTtlCache extends MkfBaseCache {
         } catch(e) {
 
             return Promise.reject(e)
+        }
+    }
+
+    walkEntries(cb: walkCallback) {
+
+        for (const itm of this._cache.entries()) {
+
+            if (!cb({key: itm[0], value: itm[1]})) break
         }
     }
 }

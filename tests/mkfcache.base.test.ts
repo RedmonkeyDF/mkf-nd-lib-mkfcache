@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest'
 import { MkfBaseCache } from '../src'
 import { MkfTtlCache } from '../src'
+import { CacheItem } from '../src/mkfcache'
 
 const sleep = (ms: number):Promise<void> => {
 
