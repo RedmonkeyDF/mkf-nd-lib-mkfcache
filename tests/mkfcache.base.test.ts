@@ -63,7 +63,7 @@ describe('MkfBaseCache tests', () => {
         }
     })
 
-    test.each(constructors)('It should expire correctly', async () => {
+    test('It should expire correctly', async () => {
 
         const cache: MkfBaseCache = new MkfTtlCache({ max: 100, ttl: 1000 })
 
@@ -71,5 +71,16 @@ describe('MkfBaseCache tests', () => {
         expect(cache.has('temp')).toStrictEqual(true)
         await sleep(2000)
         expect(cache.has('temp')).toStrictEqual(false)
+    })
+
+    test.each(constructors)('It should delete correctly.', async(ob) => {
+
+        const cache: MkfBaseCache = ob.init()
+
+        await cache.set('yellow', 'dog')
+        expect(cache.has('yellow')).toStrictEqual(true)
+        await expect(cache.delete('yellow')).resolves.toStrictEqual(true)
+        expect(cache.has('yellow')).toStrictEqual(false)
+        await expect(cache.delete('yellow')).resolves.toStrictEqual(false)
     })
 })

@@ -43,4 +43,16 @@ export class MkfTtlCache extends MkfBaseCache {
 
         return this._cache.has(key)
     }
+
+    delete(key: string): Promise<boolean> {
+
+        try {
+
+            return Promise.resolve(this._cache.delete(key))
+
+        } catch(e) {
+
+            return Promise.reject(e)
+        }
+    }
 }
