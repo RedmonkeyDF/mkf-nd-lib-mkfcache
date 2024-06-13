@@ -1,0 +1,36 @@
+{
+    "name": "@redmonkeydf/mkfcache",
+    "version": "1.0.0",
+    "description": "",
+    "main": "./dist/index.js",
+    "scripts": {
+        "test": "vitest --run",
+        "build": "tsup ./src"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/RedmonkeyDF/mkf-nd-lib-mkfcache"
+    },
+    "keywords": [],
+    "author": "Sean Mathews",
+    "license": "ISC",
+    "devDependencies": {
+        "@isaacs/ttlcache": "^1.4.1",
+        "tsup": "^8.1.0",
+        "typescript": "^5.4.5",
+        "vitest": "^1.6.0"
+    },
+    "files": [
+        "dist",
+        "package.json"
+    ],
+    "exports": {
+        ".": {
+            "require": "./dist/index.js",
+            "import": "./dist/index.mjs",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts"
+}
