@@ -4,4 +4,6 @@ export abstract class MkfBaseCache {
     abstract get<T>(key: string, opts?: {}): Promise<T|undefined>;
     abstract has(key: string): boolean;
     abstract delete(key: string):Promise<boolean>
+    abstract size(): Promise<number>
+    abstract clear(): Promise<void>
 }

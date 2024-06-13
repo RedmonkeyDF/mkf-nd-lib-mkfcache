@@ -83,4 +83,22 @@ describe('MkfBaseCache tests', () => {
         expect(cache.has('yellow')).toStrictEqual(false)
         await expect(cache.delete('yellow')).resolves.toStrictEqual(false)
     })
+
+    test.each(constructors)('It should return the correct size.', async(ob) => {
+
+        const cache: MkfBaseCache = ob.init()
+
+        await expect(cache.size()).resolves.toStrictEqual(0)
+        await cache.set('yellow', 'dog')
+        await expect(cache.size()).resolves.toStrictEqual(1)
+        await cache.set('green', 'tamarind')
+        await expect(cache.size()).resolves.toStrictEqual(2)
+        await cache.set('purple', 'orang-u-tan')
+        await expect(cache.size()).resolves.toStrictEqual(3)
+        await expect(cache.delete('yellow')).resolves.toStrictEqual(true)
+        await expect(cache.size()).resolves.toStrictEqual(2)
+        await cache.clear()
+        await expect(cache.size()).resolves.toStrictEqual(0)
+    })
+
 })
